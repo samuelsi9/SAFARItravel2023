@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>BAHÇEŞEHİR CYPRUS UNIVERSITY</title>
+
+        <script type="text/javascript" src="/js/jquery-1.2.3.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.menu.min.js"></script>
+        <script type="text/javascript" src="/js/jquery.dimensions.min.js"></script>
+
+       	<script type='text/javascript' src='/js/jquery.bgiframe.min.js'></script>
+		<script type='text/javascript' src='/js/jquery.ajaxQueue.js'></script>
+
+		<script type='text/javascript' src='/js/localdata.js'></script>
+		<script type='text/javascript' src='/js/ui.datepicker.js'></script>
+		<script type='text/javascript' src='/js/date.js'></script>
+		<script type='text/javascript' src='/js/facebox.js'></script>
+		<script type='text/javascript' src='/js/jquery.selectCombo.js'></script>
+		<script type='text/javascript' src='/js/jquery.timer.js'></script>
+		<script type='text/javascript' src='/js/ubit.js'></script>
+
+       	<link href="/css/style.css"  rel="stylesheet" type="text/css" />
+        <link href="/js/jquery.autocomplete.css"  rel="stylesheet" type="text/css" />
+        <link href="/js/facebox.css"  rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" media="screen" title="basic" href="/css/grid.css" />
+     	<script type="text/javascript">
+		$(document).ready(function(){
+			//$('div>label').parent().addClass('label_div1');
+		});
+						</script>
+    </head>
+    <body>
+                  
+<head>
+
+        <link rel="stylesheet" href="/css/applyonline/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/applyonline/applyonline.css">
+        <link rel="shortcut icon" href="img/fav.ico"/>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- Fav & Touch Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <script type="text/javascript" src="/js/jquery-1.9.1.js"></script>
+        <script src="/js/applyonline/bootstrap.min.js"></script>
+        <script src="/js/applyonline/applyonline.js"></script>
+    <script src="/js/jquery.inputmask.js"></script>
+    <script src="/js/jquery.inputmask.extensions.js"></script>
+    <script src="/js/jquery.selectCombo.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/js/jquery.upload.js"></script>
+    <script src="/js/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="/js/ubit.js"></script>
+    <script>
+        GUNCEL_SEZON='';
+        GUNCEL_DONEM='';
+    </script>
+
+    <script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/js/jquery.bgiframe.min.js"></script>
+</head>
+ <style>
+    .list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.list-group-submenu {
+  margin-left:20px;
+}
+    </style>
+    <script language="javascript">
+        $(document).ready(function()
+    {
+            $('#diger').hide();
+            $('#proje_sertifika').hide();
+            $('#proje_label').hide();
+        $("#program_kodu1").selectCombo('/tablolar/parametre/selectoptions/aktif/1', '#modul1', {pageload:false , onData:"showModul('tr_modul1')", onNoData:"hideModul('tr_modul1')"});
+        $("#program_kodu2").selectCombo('/tablolar/parametre/selectoptions/aktif/1', '#modul2', {pageload:false, onData:"showModul('tr_modul2')", onNoData:"hideModul('tr_modul2')"});
+        $("#program_kodu3").selectCombo('/tablolar/parametre/selectoptions/aktif/1', '#modul3', {pageload:false, onData:"showModul('tr_modul3')", onNoData:"hideModul('tr_modul3')"});
+        $("#dil1").selectCombo('/ogrenciler/ogrenciuluslararasionkayit/selectoptions/fk/Array/dil/1', '#program_kodu1', {pageload:false});
+        $("#dil2").selectCombo('/ogrenciler/ogrenciuluslararasionkayit/selectoptions/fk/Array/dil/1', '#program_kodu2', {pageload:false});
+        $("#dil3").selectCombo('/ogrenciler/ogrenciuluslararasionkayit/selectoptions/fk/Array/dil/1', '#program_kodu3', {pageload:false});
+        $("#ikamet_il").selectCombo('/tablolar/ilce/selectoptions/seciniz/Choose', '#ikamet_ilce', {pageload:true, onData:"ilceSec('#ikamet_ilce')"});
+        $("#is_il").selectCombo('/tablolar/ilce/selectoptions/seciniz/Choose', '#is_ilce', {pageload:true, onData:"ilceSec('#is_ilce')"});
+         
+        $("#program_kodu1,#program_kodu2,#program_kodu3").change(function(){
+            var val=$(this).val();
+            if(val!='')
+            {
+                var arr=[$("#program_kodu1").val(),$("#program_kodu2").val(),$("#program_kodu3").val()];
+                var count=[];
+                var $this=$(this);
+                $.each(arr, function(i,v){
+                    if(v!='')
+                    {
+                        if(count.indexOf(v)>-1)
+                        {
+                            $this.val('');
+                            return;
+                        }
+                        count.push(v);
+                    }
+                });
+            }
+
+        });
+
+        /*$("#acenta_adi_diger").hide();
+        $("#acenta_diger_label").hide();
+        $("#acenta_adi").change(function(){
+            deger=$("#acenta_adi").val();
+            if(deger=='diger'){
+                $("#acenta_adi_diger").show();
+                $("#acenta_diger_label").show();
+            }
+            else{
+                $("#acenta_adi_diger").hide();
+                $("#acenta_diger_label").hide();
+            }
+        });*/
+
+        $("#program_kodu1").change(function(){
+            prog_kod=$(this).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/ogrenciler/ogrenciuluslararasionkayit/programmesaj",
+                    data: "program_kodu="+prog_kod,
+                    dataType:"json",
+                    success: function(res)
+                    {
+                        if(typeof res.msg !== "undefined")
+                        {
+                            alert(res.msg);
+                        }
+                    }
+            });
+        });
+
+        $("#program_kodu2").change(function(){
+            prog_kod=$(this).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/ogrenciler/ogrenciuluslararasionkayit/programmesaj",
+                    data: "program_kodu="+prog_kod,
+                    dataType:"json",
+                    success: function(res)
+                    {
+                        if(typeof res.msg !== "undefined")
+                        {
+                            alert(res.msg);
+                        }
+                    }
+            });
+        });
+
+        $("#program_kodu3").change(function(){
+            prog_kod=$(this).val();
+            $.ajax({
+                    type: "POST",
+                    url: "/ogrenciler/ogrenciuluslararasionkayit/programmesaj",
+                    data: "program_kodu="+prog_kod,
+                    dataType:"json",
+                    success: function(res)
+                    {
+                        if(typeof res.msg !== "undefined")
+                        {
+                            alert(res.msg);
+                        }
+                    }
+            });
+        });
+
+        $("#program_kodu1,#program_kodu2,#program_kodu3").change(function(){
+            var val1=$("#program_kodu1").val();
+            var val2=$("#program_kodu2").val();
+            var val3=$("#program_kodu3").val();
+
+            if(val1=='09012101' || val2=='09012101' || val3=='09012101'){
+                $('#diger').show();
+                $('#proje_sertifika').show();
+                $('#proje_label').show();
+            }
+        });
+
+    });
+    function showModul(id)
+    {
+        $("#"+id).show();
+        if(id=='tr_modul1')
+            $("#modul1").val(post.modul1);
+        else if(id=='tr_modul2')
+            $("#modul2").val(post.modul2);
+        else if(id=='tr_modul3')
+            $("#modul3").val(post.modul3);
+    }
+
+    function hideModul(id)
+    {
+        $("#"+id).hide();
+    }
+
+    function sec(kod,deger)
+    {
+        $("#bolum").val(kod);
+        $("#bolum_ad").val(deger);
+
+        document.getElementById("deptDiv").style.display='none'
+        document.getElementById('formDiv').style.display=''
+    }
+    function ilceSec(id)
+    {
+
+        if(!$(id).val())
+        {
+            if(id=='#ikamet_ilce')
+                $("#ikamet_ilce").val(post.ikamet_ilce);
+            else
+                $("#is_ilce").val(post.is_ilce);
+        }
+
+    }
+    function fnBolumAra(d)
+    {
+        var snc = '';
+        if (d.length<3)
+        {
+            snc='<p align="center" class=link>Aradığınız bölüm adının en az 3 harfini girin.<br><br>Listeden ilgili bölüm adına tıklayın!<br><br></p>'
+            $("#sonucDiv").html(snc);
+            return
+        }
+        snc = ''
+        $.getJSON('/tablolar/parametre/selectoptions?q=bolum&text='+d, function(j){
+                var snc = ''
+                for (var i = 0; i < j.length; i++)
+                {
+                    snc += '<li><a href="javascript:sec(\''+j[i].oV+'\',\''+j[i].oT+'\')" class=link>' + j[i].oT+'</a>'
+                }
+                $("#sonucDiv").html(snc);
+            });
+
+        if ($("#sonucDiv").html()=='')
+        {
+            snc='<p align="center" class=link><b>Aradığınız bölüm bulunamadı!</b><br><br>Bölümünüzün adını listeden bulamadıysanız, bölümünüzün adını tam olarak girin ve aşağıdaki linke tıklayın.'
+            snc = snc +'<br><br><li><a href="javascript:sec(\'999\',\''+d+'\')" class=link>' + d+'</a></p>'
+        }
+        $("#sonucDiv").html(snc);
+
+    }
+
+    function showDiv(s)
+    {
+
+        document.getElementById('formDiv').style.display='none'
+        document.getElementById('deptDiv').style.display=''
+    }
+
+    function hideDiv()
+    {
+
+        document.getElementById('deptDiv').style.display='none'
+        document.getElementById('formDiv').style.display=''
+    }
+
+    function bilgiGetir()
+    {
+        var id=$("#kb_tc_kimlik_no").val();
+        if(id)
+        {
+            $.ajax({
+                   type: "POST",
+                   url: "/ogrenciler/ogrenciuluslararasionkayit/bilgigetir",
+                   data: "kb_tc_kimlik_no="+id,
+                   dataType:"json",
+                   success: function(msg)
+                   {
+                        if(msg)
+                        {
+                            $("#ikamet_il").selectCombo('/tablolar/ilce/selectoptions/seciniz/Choose', '#ikamet_ilce', {pageload:true});
+                            $("#is_il").selectCombo('/tablolar/ilce/selectoptions', '#is_ilce', {pageload:true});
+                            jsonToForm("#frm1", msg);
+                        }
+                   }
+             });
+         }
+    }
+
+
+    </script>
+<script language="javascript">
+
+    function Kontrol()
+    {
+
+        if ($("#program_kodu1").val() == '')
+        {
+            alert("Choose at least one program...");
+            return(false);
+        }
+
+        if ($("#kb_adi").val() == '')
+        {
+            alert("Fill the Name...");
+            return(false);
+        }
+        if ($("#kb_soyadi").val() == '')
+        {
+            alert("Fill the Last Name...");
+            return(false);
+        }
+                if ($("#kb_cinsiyet").val() == '')
+        {
+            alert("Fill the Gender...");
+            return(false);
+        }
+
+        if ($("#kb_tabiyeti_kodu").val() == '')
+        {
+            alert("Choose the Nationality...");
+            return(false);
+        }
+        if ($("#pasaport_no").val() == '')
+        {
+            alert("Enter your Passport Number...");
+            return(false);
+        }
+        if ($("#ikamet_adresi").val() == '')
+        {
+            alert("Fill the Home Address...");
+            return(false);
+        }
+
+        if ($("#cep_tel").val() == '')
+        {
+            alert("Fill the cell phone number...");
+            return(false);
+        }
+
+        if ($("#eposta_adresi").val() == '')
+        {
+            alert("Fill the e-mail...");
+            return(false);
+        }
+        if ($("#universite_ad").val() == '')
+        {
+            alert("Fill the High School Graduated...");
+            return(false);
+        }
+
+        /*if ($("#aciklama").val() == '')
+        {
+            alert("Please state briefly why you would like to study at Ois ");
+            return(false);
+        }*/
+
+        if ($("#mezuniyet_yili").val() == '')
+        {
+            alert("Fill the Graduation Date");
+            return(false);
+        }
+                /*if ($("#diger").val() == '')
+        {
+            alert("Upload the Motivation Letter...");
+            return(false);
+        }*/
+        /*  if ($("#saglik_sigorta").val() == '')
+        {
+            alert("Do you  have Health Insurance which is valid in Turkey?");
+            return(false);
+        }*/
+            document.frm1.submit();
+    }
+
+</SCRIPT>
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+
+
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+
+</head>
+<body class="in">
+
+        <div class="container">
+            <div class="text-center col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+            <div id="MainMenu">
+              <div class="list-group panel">
+                <a href="#demo4" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">
+                    <img src="/images/uni_logo.png" width="189" alt="logo" />
+                </a>
+                                </div>
+             </div>
+
+
+            </div>
+        </div>
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div class="well">
+                    <div class="undergraduate-form">
+
+
+    <p class="text-center"><b>(*) Fields that must be filled.</b></p>
+        <p class="text-center"> Applicants may apply to maximum 3 programs. (Please make your program choices according to the order of your preference as 1st, 2nd, 3rd choice).</p>
+        <div class="form-title">PROGRAMS APPLIED</div>
+    <p>The applicants are asked to choose first the program and then the module they want to apply (if any)</p>
+
+        <form name="frm1" id="frm1" class="form-horizontal" method="post" action="/ogrenciler/ogrenciuluslararasionkayit/kaydet" enctype="multipart/form-data" onsubmit="Kontrol()">
+         <input type="hidden" name="dil" value="en">
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Program 1st Choice</label>
+                </div>
+                <div class="col-sm-8">
+                    <span>
+<select name="program_kodu1" id="program_kodu1" class="form-control">
+    <option value="" label="Choose">Choose</option>
+    <option value="3006001" label="Computer Engineering Master-with Thesis ( Master )">Computer Engineering Master-with Thesis ( Master )</option>
+    <option value="3003001" label="Political Science and International Relations PhD  ( PhD )">Political Science and International Relations PhD  ( PhD )</option>
+    <option value="3007001" label="International and Comparative Law Master-with Thesis ( Master )">International and Comparative Law Master-with Thesis ( Master )</option>
+    <option value="0501001" label="Tourism and Hotel Management ( Bachelor )">Tourism and Hotel Management ( Bachelor )</option>
+    <option value="0101001" label="Business Administration ( Bachelor )">Business Administration ( Bachelor )</option>
+    <option value="0403001" label="English Language Teaching ( Bachelor )">English Language Teaching ( Bachelor )</option>
+    <option value="0301001" label="Law LL.B. ( Bachelor )">Law LL.B. ( Bachelor )</option>
+    <option value="3002001" label="Master of Business Administration - with Thesis ( Master )">Master of Business Administration - with Thesis ( Master )</option>
+    <option value="0201001" label="Computer Engineering ( Bachelor )">Computer Engineering ( Bachelor )</option>
+    <option value="3001001" label="Master of Political Science and International Relations - with Thesis ( Master )">Master of Political Science and International Relations - with Thesis ( Master )</option>
+    <option value="0106001" label="Management Information Systems ( Bachelor )">Management Information Systems ( Bachelor )</option>
+    <option value="0102001" label="Political Science and International Relations ( Bachelor )">Political Science and International Relations ( Bachelor )</option>
+    <option value="0105001" label="Banking and Finance ( Bachelor )">Banking and Finance ( Bachelor )</option>
+    <option value="4001001" label="Computer Programming ( Associate )">Computer Programming ( Associate )</option>
+    <option value="0202001" label="Civil Engineering ( Bachelor )">Civil Engineering ( Bachelor )</option>
+    <option value="4002001" label="Business Management ( Associate )">Business Management ( Associate )</option>
+    <option value="3005001" label="Architecture Master  ( Master )">Architecture Master  ( Master )</option>
+    <option value="0104001" label="Psychology ( Bachelor )">Psychology ( Bachelor )</option>
+    <option value="3004001" label="Business Administration PhD  ( PhD )">Business Administration PhD  ( PhD )</option>
+    <option value="3009001" label="Public Administration Master Program - with Thesis ( Master )">Public Administration Master Program - with Thesis ( Master )</option>
+    <option value="0601001" label="Gastronomy and Culinary Arts ( Bachelor )">Gastronomy and Culinary Arts ( Bachelor )</option>
+    <option value="3008001" label="Public Administration PhD ( PhD )">Public Administration PhD ( PhD )</option>
+    <option value="0204001" label="Electrical and Electronics Engineering ( Bachelor )">Electrical and Electronics Engineering ( Bachelor )</option>
+    <option value="0205001" label="Software Engineering ( Bachelor )">Software Engineering ( Bachelor )</option>
+    <option value="3009002" label="Public Administration Master Program - without Thesis ( Master )">Public Administration Master Program - without Thesis ( Master )</option>
+    <option value="0107001" label="Economy ( Bachelor )">Economy ( Bachelor )</option>
+    <option value="0206001" label="Industrial Engineering ( Bachelor )">Industrial Engineering ( Bachelor )</option>
+    <option value="0108001" label="Social Work ( Bachelor )">Social Work ( Bachelor )</option>
+    <option value="3004002" label="Business Administration PhD Bridging ( PhD )">Business Administration PhD Bridging ( PhD )</option>
+    <option value="3002002" label="Master of Business Administration - without Thesis  ( Master )">Master of Business Administration - without Thesis  ( Master )</option>
+    <option value="3006002" label="Computer Engineering Master with Bridging Courses ( Master )">Computer Engineering Master with Bridging Courses ( Master )</option>
+    <option value="3001003" label="Master of Political Science and International Relations with Bridging Courses ( Master )">Master of Political Science and International Relations with Bridging Courses ( Master )</option>
+    <option value="3005002" label="Architecture Master ( Master )">Architecture Master ( Master )</option>
+    <option value="3003002" label="Political Science and International Relations PhD Bridging ( PhD )">Political Science and International Relations PhD Bridging ( PhD )</option>
+    <option value="3002003" label="Master of Business Administration with Bridging Courses ( Master )">Master of Business Administration with Bridging Courses ( Master )</option>
+    <option value="3007002" label="International and Comparative Law Master with Bridging Courses ( Master )">International and Comparative Law Master with Bridging Courses ( Master )</option>
+    <option value="0203001" label="Architecture ( Bachelor )">Architecture ( Bachelor )</option>
+    <option value="3006003" label="Computer Engineering Master without Thesis ( Master )">Computer Engineering Master without Thesis ( Master )</option>
+    <option value="3007003" label="International and Comparative Law Master-without Thesis ( Master )">International and Comparative Law Master-without Thesis ( Master )</option>
+    <option value="3005003" label="Architecture Master with Bridging Courses ( Master )">Architecture Master with Bridging Courses ( Master )</option>
+    <option value="3001002" label="Master of Political Science and International Relations - without Thesis ( Master )">Master of Political Science and International Relations - without Thesis ( Master )</option>
+</select></span>                </div>
+            </div>
+
+            <div id="tr_modul1" style="display:none;" class="control-group">
+                    <label class="control-label no-padding-top">Choose the related module of the program</label>
+                    <div class="controls">
+                            <select multiple name="modul1[]" id="modul1" style="font-family: Tahoma; font-size: 8pt; background-color: #ffffff; color: #000000;" size="4">
+                            </select>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">Program 2nd Choice</label>
+                </div>
+                    <div class="col-sm-8">
+                        <span>
+<select name="program_kodu2" id="program_kodu2" class="form-control">
+    <option value="" label="Choose">Choose</option>
+    <option value="3006001" label="Computer Engineering Master-with Thesis ( Master )">Computer Engineering Master-with Thesis ( Master )</option>
+    <option value="3003001" label="Political Science and International Relations PhD  ( PhD )">Political Science and International Relations PhD  ( PhD )</option>
+    <option value="3007001" label="International and Comparative Law Master-with Thesis ( Master )">International and Comparative Law Master-with Thesis ( Master )</option>
+    <option value="0501001" label="Tourism and Hotel Management ( Bachelor )">Tourism and Hotel Management ( Bachelor )</option>
+    <option value="0101001" label="Business Administration ( Bachelor )">Business Administration ( Bachelor )</option>
+    <option value="0403001" label="English Language Teaching ( Bachelor )">English Language Teaching ( Bachelor )</option>
+    <option value="0301001" label="Law LL.B. ( Bachelor )">Law LL.B. ( Bachelor )</option>
+    <option value="3002001" label="Master of Business Administration - with Thesis ( Master )">Master of Business Administration - with Thesis ( Master )</option>
+    <option value="0201001" label="Computer Engineering ( Bachelor )">Computer Engineering ( Bachelor )</option>
+    <option value="3001001" label="Master of Political Science and International Relations - with Thesis ( Master )">Master of Political Science and International Relations - with Thesis ( Master )</option>
+    <option value="0106001" label="Management Information Systems ( Bachelor )">Management Information Systems ( Bachelor )</option>
+    <option value="0102001" label="Political Science and International Relations ( Bachelor )">Political Science and International Relations ( Bachelor )</option>
+    <option value="0105001" label="Banking and Finance ( Bachelor )">Banking and Finance ( Bachelor )</option>
+    <option value="4001001" label="Computer Programming ( Associate )">Computer Programming ( Associate )</option>
+    <option value="0202001" label="Civil Engineering ( Bachelor )">Civil Engineering ( Bachelor )</option>
+    <option value="4002001" label="Business Management ( Associate )">Business Management ( Associate )</option>
+    <option value="3005001" label="Architecture Master  ( Master )">Architecture Master  ( Master )</option>
+    <option value="0104001" label="Psychology ( Bachelor )">Psychology ( Bachelor )</option>
+    <option value="3004001" label="Business Administration PhD  ( PhD )">Business Administration PhD  ( PhD )</option>
+    <option value="3009001" label="Public Administration Master Program - with Thesis ( Master )">Public Administration Master Program - with Thesis ( Master )</option>
+    <option value="0601001" label="Gastronomy and Culinary Arts ( Bachelor )">Gastronomy and Culinary Arts ( Bachelor )</option>
+    <option value="3008001" label="Public Administration PhD ( PhD )">Public Administration PhD ( PhD )</option>
+    <option value="0204001" label="Electrical and Electronics Engineering ( Bachelor )">Electrical and Electronics Engineering ( Bachelor )</option>
+    <option value="0205001" label="Software Engineering ( Bachelor )">Software Engineering ( Bachelor )</option>
+    <option value="3009002" label="Public Administration Master Program - without Thesis ( Master )">Public Administration Master Program - without Thesis ( Master )</option>
+    <option value="0107001" label="Economy ( Bachelor )">Economy ( Bachelor )</option>
+    <option value="0206001" label="Industrial Engineering ( Bachelor )">Industrial Engineering ( Bachelor )</option>
+    <option value="0108001" label="Social Work ( Bachelor )">Social Work ( Bachelor )</option>
+    <option value="3004002" label="Business Administration PhD Bridging ( PhD )">Business Administration PhD Bridging ( PhD )</option>
+    <option value="3002002" label="Master of Business Administration - without Thesis  ( Master )">Master of Business Administration - without Thesis  ( Master )</option>
+    <option value="3006002" label="Computer Engineering Master with Bridging Courses ( Master )">Computer Engineering Master with Bridging Courses ( Master )</option>
+    <option value="3001003" label="Master of Political Science and International Relations with Bridging Courses ( Master )">Master of Political Science and International Relations with Bridging Courses ( Master )</option>
+    <option value="3005002" label="Architecture Master ( Master )">Architecture Master ( Master )</option>
+    <option value="3003002" label="Political Science and International Relations PhD Bridging ( PhD )">Political Science and International Relations PhD Bridging ( PhD )</option>
+    <option value="3002003" label="Master of Business Administration with Bridging Courses ( Master )">Master of Business Administration with Bridging Courses ( Master )</option>
+    <option value="3007002" label="International and Comparative Law Master with Bridging Courses ( Master )">International and Comparative Law Master with Bridging Courses ( Master )</option>
+    <option value="0203001" label="Architecture ( Bachelor )">Architecture ( Bachelor )</option>
+    <option value="3006003" label="Computer Engineering Master without Thesis ( Master )">Computer Engineering Master without Thesis ( Master )</option>
+    <option value="3007003" label="International and Comparative Law Master-without Thesis ( Master )">International and Comparative Law Master-without Thesis ( Master )</option>
+    <option value="3005003" label="Architecture Master with Bridging Courses ( Master )">Architecture Master with Bridging Courses ( Master )</option>
+    <option value="3001002" label="Master of Political Science and International Relations - without Thesis ( Master )">Master of Political Science and International Relations - without Thesis ( Master )</option>
+</select></span>                    </div>
+            </div>
+
+            <div id="tr_modul2" style="display:none;" class="control-group">
+                    <label class="control-label no-padding-top">Choose the related module of the program</label>
+                    <select multiple name="modul2[]" id="modul2" style="font-family: Tahoma; font-size: 8pt; background-color: #ffffff; color: #000000;" size="4">
+                    </select>
+            </div>
+
+            <div  class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label"> Program 3rd Choice</label>
+                </div>
+
+                    <div class="col-sm-8">
+                        <span>
+<select name="program_kodu3" id="program_kodu3" class="form-control">
+    <option value="" label="Choose">Choose</option>
+    <option value="3006001" label="Computer Engineering Master-with Thesis ( Master )">Computer Engineering Master-with Thesis ( Master )</option>
+    <option value="3003001" label="Political Science and International Relations PhD  ( PhD )">Political Science and International Relations PhD  ( PhD )</option>
+    <option value="3007001" label="International and Comparative Law Master-with Thesis ( Master )">International and Comparative Law Master-with Thesis ( Master )</option>
+    <option value="0501001" label="Tourism and Hotel Management ( Bachelor )">Tourism and Hotel Management ( Bachelor )</option>
+    <option value="0101001" label="Business Administration ( Bachelor )">Business Administration ( Bachelor )</option>
+    <option value="0403001" label="English Language Teaching ( Bachelor )">English Language Teaching ( Bachelor )</option>
+    <option value="0301001" label="Law LL.B. ( Bachelor )">Law LL.B. ( Bachelor )</option>
+    <option value="3002001" label="Master of Business Administration - with Thesis ( Master )">Master of Business Administration - with Thesis ( Master )</option>
+    <option value="0201001" label="Computer Engineering ( Bachelor )">Computer Engineering ( Bachelor )</option>
+    <option value="3001001" label="Master of Political Science and International Relations - with Thesis ( Master )">Master of Political Science and International Relations - with Thesis ( Master )</option>
+    <option value="0106001" label="Management Information Systems ( Bachelor )">Management Information Systems ( Bachelor )</option>
+    <option value="0102001" label="Political Science and International Relations ( Bachelor )">Political Science and International Relations ( Bachelor )</option>
+    <option value="0105001" label="Banking and Finance ( Bachelor )">Banking and Finance ( Bachelor )</option>
+    <option value="4001001" label="Computer Programming ( Associate )">Computer Programming ( Associate )</option>
+    <option value="0202001" label="Civil Engineering ( Bachelor )">Civil Engineering ( Bachelor )</option>
+    <option value="4002001" label="Business Management ( Associate )">Business Management ( Associate )</option>
+    <option value="3005001" label="Architecture Master  ( Master )">Architecture Master  ( Master )</option>
+    <option value="0104001" label="Psychology ( Bachelor )">Psychology ( Bachelor )</option>
+    <option value="3004001" label="Business Administration PhD  ( PhD )">Business Administration PhD  ( PhD )</option>
+    <option value="3009001" label="Public Administration Master Program - with Thesis ( Master )">Public Administration Master Program - with Thesis ( Master )</option>
+    <option value="0601001" label="Gastronomy and Culinary Arts ( Bachelor )">Gastronomy and Culinary Arts ( Bachelor )</option>
+    <option value="3008001" label="Public Administration PhD ( PhD )">Public Administration PhD ( PhD )</option>
+    <option value="0204001" label="Electrical and Electronics Engineering ( Bachelor )">Electrical and Electronics Engineering ( Bachelor )</option>
+    <option value="0205001" label="Software Engineering ( Bachelor )">Software Engineering ( Bachelor )</option>
+    <option value="3009002" label="Public Administration Master Program - without Thesis ( Master )">Public Administration Master Program - without Thesis ( Master )</option>
+    <option value="0107001" label="Economy ( Bachelor )">Economy ( Bachelor )</option>
+    <option value="0206001" label="Industrial Engineering ( Bachelor )">Industrial Engineering ( Bachelor )</option>
+    <option value="0108001" label="Social Work ( Bachelor )">Social Work ( Bachelor )</option>
+    <option value="3004002" label="Business Administration PhD Bridging ( PhD )">Business Administration PhD Bridging ( PhD )</option>
+    <option value="3002002" label="Master of Business Administration - without Thesis  ( Master )">Master of Business Administration - without Thesis  ( Master )</option>
+    <option value="3006002" label="Computer Engineering Master with Bridging Courses ( Master )">Computer Engineering Master with Bridging Courses ( Master )</option>
+    <option value="3001003" label="Master of Political Science and International Relations with Bridging Courses ( Master )">Master of Political Science and International Relations with Bridging Courses ( Master )</option>
+    <option value="3005002" label="Architecture Master ( Master )">Architecture Master ( Master )</option>
+    <option value="3003002" label="Political Science and International Relations PhD Bridging ( PhD )">Political Science and International Relations PhD Bridging ( PhD )</option>
+    <option value="3002003" label="Master of Business Administration with Bridging Courses ( Master )">Master of Business Administration with Bridging Courses ( Master )</option>
+    <option value="3007002" label="International and Comparative Law Master with Bridging Courses ( Master )">International and Comparative Law Master with Bridging Courses ( Master )</option>
+    <option value="0203001" label="Architecture ( Bachelor )">Architecture ( Bachelor )</option>
+    <option value="3006003" label="Computer Engineering Master without Thesis ( Master )">Computer Engineering Master without Thesis ( Master )</option>
+    <option value="3007003" label="International and Comparative Law Master-without Thesis ( Master )">International and Comparative Law Master-without Thesis ( Master )</option>
+    <option value="3005003" label="Architecture Master with Bridging Courses ( Master )">Architecture Master with Bridging Courses ( Master )</option>
+    <option value="3001002" label="Master of Political Science and International Relations - without Thesis ( Master )">Master of Political Science and International Relations - without Thesis ( Master )</option>
+</select></span>                    </div>
+            </div>
+
+
+
+
+            <div class="form-title">PERSONAL INFORMATION</div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Passport Number</label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="pasaport_no" type="text" id="pasaport_no" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Gender</label>
+                </div>
+
+                <div class="col-sm-8">
+                        <div class="checkbox radiobox">
+                            <label><input type="radio" name="kb_cinsiyet" value="Erkek" checked><span>Male</span></label>
+                            <label><input type="radio" name="kb_cinsiyet" value="Kadın"><span>Female</span></label>
+                        </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Name</label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="kb_adi" type="text" id="kb_adi" class="form-control" size="30" maxlength="50" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Last Name</label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="kb_soyadi" type="text" id="kb_soyadi" class="form-control" size="30" maxlength="50" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label"> Father Name</label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="kb_baba_adi" type="text" id="kb_baba_adi" class="form-control" size="30" maxlength="50">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">Mother Name</label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="kb_ana_adi" type="text" id="kb_ana_adi" class="form-control" size="30" maxlength="50">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">Place of Birth </label>
+                </div>
+                <div class="col-sm-8">
+                    <input  name="kb_dogum_yeri" type="text" id="kb_dogum_yeri" class="form-control" size="30" maxlength="50">
+                </div>
+            </div>
+
+            <div class="form-group">
+                    <div class="col-sm-4 label-div">
+                        <label class="control-label">* Date of Birth</label>
+                    </div>
+                    <div class="col-sm-8">
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 margin-bottom-10-xs">
+                                <select name="gun" class="form-control" required>
+                                    <option value=''>Day</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option>                                </select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4 margin-bottom-10-xs">
+                                <select name="ay" class="form-control" required>
+                                    <option value=''>Month</option><option value='01'>01</option><option value='02'>02</option><option value='03'>03</option><option value='04'>04</option><option value='05'>05</option><option value='06'>06</option><option value='07'>07</option><option value='08'>08</option><option value='09'>09</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option>                                </select>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4 margin-bottom-10-xs">
+                                <select name="yil" class="form-control" required>
+                                    <option value=''>Year</option><option value='2008'>2008</option><option value='2007'>2007</option><option value='2006'>2006</option><option value='2005'>2005</option><option value='2004'>2004</option><option value='2003'>2003</option><option value='2002'>2002</option><option value='2001'>2001</option><option value='2000'>2000</option><option value='1999'>1999</option><option value='1998'>1998</option><option value='1997'>1997</option><option value='1996'>1996</option><option value='1995'>1995</option><option value='1994'>1994</option><option value='1993'>1993</option><option value='1992'>1992</option><option value='1991'>1991</option><option value='1990'>1990</option><option value='1989'>1989</option><option value='1988'>1988</option><option value='1987'>1987</option><option value='1986'>1986</option><option value='1985'>1985</option><option value='1984'>1984</option><option value='1983'>1983</option><option value='1982'>1982</option><option value='1981'>1981</option><option value='1980'>1980</option><option value='1979'>1979</option><option value='1978'>1978</option><option value='1977'>1977</option><option value='1976'>1976</option><option value='1975'>1975</option><option value='1974'>1974</option><option value='1973'>1973</option><option value='1972'>1972</option><option value='1971'>1971</option><option value='1970'>1970</option><option value='1969'>1969</option><option value='1968'>1968</option><option value='1967'>1967</option><option value='1966'>1966</option><option value='1965'>1965</option><option value='1964'>1964</option><option value='1963'>1963</option><option value='1962'>1962</option><option value='1961'>1961</option><option value='1960'>1960</option><option value='1959'>1959</option><option value='1958'>1958</option><option value='1957'>1957</option><option value='1956'>1956</option><option value='1955'>1955</option><option value='1954'>1954</option><option value='1953'>1953</option><option value='1952'>1952</option><option value='1951'>1951</option><option value='1950'>1950</option>                                </select>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                  <label class="control-label">* Nationality</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <select id="kb_tabiyeti_kodu" class="form-control"  name="kb_tabiyeti_kodu">
+                        <option value=''>Choose</option><option value='660'>Afghan</option><option value='070'>Albanian</option><option value='208'>Algerian</option><option value='400'>American</option><option value='043'>Andorran</option><option value='330'>Angolan</option><option value='459'>Antiguans, Barbudans</option><option value='528'>Argentinean</option><option value='077'>Armenian</option><option value='800'>Australian</option><option value='038'>Austrian</option><option value='078'>Azerbaijani</option><option value='453'>Bahamian</option><option value='640'>Bahraini</option><option value='666'>Bangladeshi</option><option value='469'>Barbadian</option><option value='391'>Batswana (pl.)</option><option value='073'>Belarusian</option><option value='017'>Belgian</option><option value='421'>Belizean</option><option value='284'>Beninese</option><option value='675'>Bhutanese</option><option value='516'>Bolivian</option><option value='093'>Bosnian, Herzegovinian</option><option value='508'>Brazilian</option><option value='006'>British</option><option value='703'>Bruneian</option><option value='068'>Bulgarian</option><option value='236'>Burkina Faso </option><option value='328'>Burundian</option><option value='696'>Cambodian</option><option value='302'>Cameroonian</option><option value='404'>Canadian</option><option value='247'>Cape Verdean</option><option value='306'>Central African</option><option value='962'>Chadian</option><option value='512'>Chilean</option><option value='720'>Chinese</option><option value='480'>Colombian</option><option value='375'>Comoran</option><option value='961'> Congolese</option><option value='436'>Costa Rican</option><option value='092'>Croatian</option><option value='448'>Cuban</option><option value='600'>Cypriot</option><option value='061'>Czech</option><option value='008'>Danish</option><option value='318'>Democratic Congolese</option><option value='338'>Djibouti</option><option value='456'>Dominican</option><option value='003'>Dutch</option><option value='626'>East Timorese</option><option value='500'>Ecuadorean</option><option value='220'>Egyptian</option><option value='310'>Equatorial Guinean</option><option value='336'>Eritrean</option><option value='053'>Estonian</option><option value='334'>Ethiopian</option><option value='815'>Fijian</option><option value='708'>Filipino</option><option value='032'>Finnish</option><option value='001'>French</option><option value='314'>Gabonese</option><option value='252'>Gambian</option><option value='076'>Georgian</option><option value='004'>German</option><option value='276'>Ghanaian</option><option value='009'>Greek</option><option value='473'>Grenadan</option><option value='416'>Guatemalan</option><option value='257'>Guinea-Bissauan</option><option value='260'>Guinean</option><option value='488'>Guyanese</option><option value='452'>Haitian</option><option value='424'>Honduran</option><option value='064'>Hungarian</option><option value='024'>Icelander</option><option value='664'>Indian</option><option value='700'>Indonesian</option><option value='616'>Iranian</option><option value='612'>Iraqi</option><option value='007'>Irish</option><option value='624'>Israeli</option><option value='005'>Italian</option><option value='272'>Ivorian</option><option value='464'>Jamaican</option><option value='732'>Japanese</option><option value='628'>Jordanian</option><option value='079'>Kazakhstani</option><option value='346'>Kenyan</option><option value='083'>Kirghiz</option><option value='812'>Kiribati</option><option value='095'>Kosova</option><option value='636'>Kuwaiti</option><option value='684'>Laotian</option><option value='054'>Latvian</option><option value='604'>Lebanese</option><option value='268'>Liberian</option><option value='216'>Libyan</option><option value='037'>Liechtensteiner</option><option value='055'>Lithuanian</option><option value='018'>Luxembourger</option><option value='096'>Macedonian</option><option value='370'>Malagasy</option><option value='386'>Malawian</option><option value='701'>Malaysian</option><option value='667'>Maldivan</option><option value='232'>Malian</option><option value='046'>Maltese</option><option value='824'>Marshallese</option><option value='228'>Mauritanian</option><option value='373'>Mauritian</option><option value='412'>Mexican</option><option value='823'>Micronesian</option><option value='074'>Moldovan</option><option value='716'>Mongolian</option><option value='204'>Moroccan</option><option value='395'>Mosotho,</option><option value='366'>Mozambican</option><option value='676'>Myanmarese  </option><option value='389'>Namibian</option><option value='803'>Nauruan</option><option value='672'>Nepalese</option><option value='804'>New Zealander</option><option value='432'>Nicaraguan</option><option value='288'>Nigerian</option><option value='240'>Nigerien</option><option value='816'>Ni-Vanuatu</option><option value='724'>North Korean</option><option value='028'>Norwegian</option><option value='649'>Omani</option><option value='662'>Pakistani</option><option value='825'>Palauan</option><option value='625'>Palestine</option><option value='442'>Panamanian</option><option value='801'>Papua New Guinean</option><option value='520'>Paraguayan</option><option value='504'>Peruvian</option><option value='060'>Polish</option><option value='010'>Portuguese</option><option value='644'>Qatari</option><option value='066'>Romanian</option><option value='075'>Russian</option><option value='324'>Rwandan</option><option value='465'>Saint Lucian</option><option value='428'>Salvadoran</option><option value='830'>Samoan</option><option value='047'>San Marinese</option><option value='311'>Sao Tomean</option><option value='632'>Saudi Arabian</option><option value='248'>Senegalese</option><option value='094'>Serbian or Montenegrin</option><option value='355'>Seychellois</option><option value='264'>Sierra Leonean</option><option value='706'>Singaporean</option><option value='063'>Slovakian</option><option value='091'>Slovenian</option><option value='806'>Solomon Islander</option><option value='342'>Somali</option><option value='388'>South African</option><option value='728'>South Korean</option><option value='960'>South Sudanese</option><option value='011'>Spanish</option><option value='669'>Sri Lankan</option><option value='224'>Sudanese</option><option value='492'>Surinamer</option><option value='393'>Swazi</option><option value='030'>Swedish</option><option value='039'>Swiss</option><option value='608'>Syrian</option><option value='736'>Taiwanese</option><option value='082'>Tajik, Tadzhik</option><option value='352'>Tanzanian</option><option value='680'>Thai</option><option value='280'>Togolese</option><option value='817'>Tongan</option><option value='472'>Trinidadian or Tobagonian</option><option value='212'>Tunisian</option><option value='052'>Turkish</option><option value='123'>Turkish Cypriot</option><option value='080'>Turkmen(s)</option><option value='807'>Tuvaluan</option><option value='350'>Ugandan</option><option value='072'>Ukrainian</option><option value='647'>United Arab Emirian</option><option value='524'>Uruguayan</option><option value='081'>Uzbek</option><option value='484'>Venezuelan</option><option value='690'>Vietnamese</option><option value='653'>Yemeni</option><option value='378'>Zambian</option><option value='382'>Zimbabwean</option>                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Home Address</label>
+                </div>
+                <div class="col-sm-8">
+                    <textarea  name="ikamet_adresi" id="ikamet_adresi" rows="3" class="form-control" required></textarea>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Phone Numbers</label>
+                </div>
+
+                    <div class="col-sm-8">
+
+                            <div class="form-group">
+                                    <div class="col-xs-12 col-md-3 padding-top-10">
+                                        <div class="margin-bottom-5-xs">* Cellular</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="input-group">
+                                                <div class="input-group-addon">+</div>
+                                                <input  name="cep_tel" type="text" id="cep_tel" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                    <div class="col-xs-12 col-md-3 padding-top-10">
+                                        <div class="margin-bottom-5-xs">Home</div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">+</div>
+                                            <input  name="ev_tel" type="text" id="ev_tel" class="form-control" >
+                                        </div>
+                                    </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 padding-top-10">
+                                    <div class="margin-bottom-5-xs">Business</div>
+                                </div>
+
+                                <div class="col-xs-12 col-md-9">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">+</div>
+                                        <input  name="is_tel" type="text" id="is_tel" class="form-control" >
+                                    </div>
+                                </div>
+
+                            </div>
+
+                    </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* E-Mail</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input  name="eposta_adresi" type="text" id="eposta_adresi" class="form-control" required>
+                </div>
+            </div>
+            <input type="hidden" name="token" id="token" value=""/>
+
+            
+                <div class="form-group">
+                    <div class="col-sm-4 label-div">
+                        <label class="control-label">Where did you hear about us?</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select  name="bizi_nereden_duydun" id="bizi_nereden_duydun" class="form-control" required>
+                            <option value=''>Choose</option><option value='Advertisement'>Advertisement</option><option value='Consulty Teacher'>Consulty Teacher</option><option value='Facebook'>Facebook</option><option value='Fair'>Fair</option><option value='Friend / Family'>Friend / Family</option><option value='Instagram'>Instagram</option><option value='Other'>Other</option><option value='Twitter'>Twitter</option>                        </select>
+                    </div>
+                </div>
+            
+        <div class="form-title">EDUCATIONAL INFORMATION</div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">* High School Graduated</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input type="text" name="universite_ad" id="universite_ad" class="form-control" required/>
+                            </div>
+            </div>
+
+                    <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">* Graduated Country</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <select id="diploma_ulke" class="form-control"  name="diploma_ulke">
+                                    <option value=''>Choose</option><option value='AF'>Afghanistan</option><option value='AX'>Aland</option><option value='AL'>Albania</option><option value='GBA'>Alderney</option><option value='DZ'>Algeria</option><option value='AD'>Andorra</option><option value='AO'>Angola</option><option value='AG'>Antigua and Barbuda</option><option value='AR'>Argentina</option><option value='AM'>Armenia</option><option value='AW'>Aruba</option><option value='AU'>Australia</option><option value='AT'>Austria</option><option value='AZ'>Azerbaijan</option><option value='BH'>Bahrain</option><option value='BD'>Bangladesh</option><option value='BB'>Barbados</option><option value='BY'>Belarus</option><option value='BE'>Belgium</option><option value='BZ'>Belize</option><option value='BJ'>Benin</option><option value='BT'>Bhutan</option><option value='BO'>Bolivia</option><option value='BA'>Bosnia and Herzegovina</option><option value='BW'>Botswana</option><option value='BR'>Brazil</option><option value='BN'>Brunei</option><option value='BG'>Bulgaria</option><option value='BFA'>Burkina Faso</option><option value='BI'>Burundi</option><option value='KH'>Cambodia</option><option value='CM'>Cameroon</option><option value='CA'>Canada</option><option value='CV'>Cape Verde</option><option value='CF'>Central African Republic</option><option value='TD'>Chad</option><option value='CL'>Chile</option><option value='CN'>China</option><option value='CO'>Colombia</option><option value='KM'>Comoros</option><option value='CR'>Costa Rica</option><option value='HR'>Croatia</option><option value='CU'>Cuba</option><option value='CY'>Cyprus</option><option value='CZ'>Czech Republic</option><option value='CD'>Democratic Republic of Congo</option><option value='DK'>Denmark</option><option value='DJ'>Djibouti</option><option value='DM'>Dominica</option><option value='DO'>Dominican Republic</option><option value='EC'>Ecuador</option><option value='EG'>Egypt</option><option value='ES'>Spain</option><option value='ENG'>England</option><option value='ER'>Eritrea</option><option value='EST'>Estonia</option><option value='ET'>Ethiopia</option><option value='FO'>Faroe Islands</option><option value='FJ'>Fiji</option><option value='FI'>Finland</option><option value='FR'>France</option><option value='GM'>Gambia</option><option value='GE'>Georgia</option><option value='DE'>Germany</option><option value='GH'>Ghana</option><option value='GI'>Gibraltar</option><option value='GR'>Greece</option><option value='GL'>Greenland</option><option value='GT'>Guatemala</option><option value='GG'>Guernsey</option><option value='GN'>Guinea</option><option value='GW'>Guinea-Bissau</option><option value='HT'>Haiti</option><option value='HN'>Honduras</option><option value='HK'>Hong Kong</option><option value='HU'>Hungary</option><option value='IS'>Iceland</option><option value='IN'>India</option><option value='ID'>Indonesia</option><option value='IR'>Iran</option><option value='IQ'>Iraq</option><option value='IRL'>Ireland</option><option value='GBM'>Isle of Man</option><option value='IL'>Israel</option><option value='IT'>Italy</option><option value='CI'>Ivory Coast</option><option value='JM'>Jamaica</option><option value='JP'>Japan</option><option value='JE'>Jersey</option><option value='JO'>Jordan</option><option value='KZ'>Kazakhistan</option><option value='KE'>Kenya</option><option value='KI'>Kiribati</option><option value='KW'>Kuwait</option><option value='KG'>Kyrgyzstan</option><option value='LA'>Laos</option><option value='LV'>Latvia</option><option value='LB'>Lebanon</option><option value='LS'>Lesotho</option><option value='LR'>Liberia</option><option value='LY'>Libya</option><option value='LI'>Liechtenstein</option><option value='LT'>Lithuania</option><option value='LU'>Luxembourg</option><option value='MO'>Macau</option><option value='MK'>Macedonia</option><option value='MG'>Madagascar</option><option value='MW'>Malawi</option><option value='MY'>Malaysia</option><option value='MALI'>Mali</option><option value='M'>Malta</option><option value='MH'>Marshall Islands</option><option value='MR'>Mauritania</option><option value='MX'>Mexico</option><option value='MD'>Moldova</option><option value='MC'>Monaco</option><option value='MN'>Mongolia</option><option value='ME'>Montenegro</option><option value='MA'>Morocco</option><option value='MZ'>Mozambique</option><option value='MM'>Myanmar</option><option value='NA'>Namibia</option><option value='NR'>Nauru</option><option value='NP'>Nepal</option><option value='NL'>Netherlands</option><option value='NZ'>New Zealand</option><option value='NI'>Nicaragua</option><option value='NE'>Niger</option><option value='NG'>Nigeria</option><option value='KP'>North Korea</option><option value='NO'>Norway</option><option value='OM'>Oman</option><option value='PK'>Pakistan</option><option value='PS'>Palestine</option><option value='PA'>Panama</option><option value='PG'>Papua New Guinea</option><option value='PY'>Paraguay</option><option value='PE'>Peru</option><option value='PH'>Philippines</option><option value='PL'>Poland</option><option value='PT'>Portugal</option><option value='PR'>Puerto Rico</option><option value='QA'>Qatar</option><option value='CG'>Republic of the Congo</option><option value='RO'>Rumania</option><option value='RU'>Russia</option><option value='RW'>Rwanda</option><option value='KN'>Saint Kitts and Nevis</option><option value='LC'>Saint Lucia</option><option value='WS'>Samoa</option><option value='SM'>San Marino</option><option value='ST'>São Tomé and Príncipe</option><option value='SA'>Saudi Arabia</option><option value='SCO'>Scotland</option><option value='SN'>Senegal</option><option value='RS'>Serbia</option><option value='SC'>Seychelles</option><option value='SL'>Sierra Leone</option><option value='SG'>Singapore</option><option value='SK'>Slovakia</option><option value='SI'>Slovenia</option><option value='SB'>Soloman Islands</option><option value='SO'>Somalia</option><option value='ZA'>South Africa</option><option value='KR'>South Korea</option><option value='LK'>Sri Lanka</option><option value='SD'>Sudan</option><option value='SZ'>Swaziland</option><option value='SE'>Sweden</option><option value='CH'>Switzerland</option><option value='SU'>Syria</option><option value='TJ'>Tajikistan</option><option value='TZ'>Tanzania</option><option value='TH'>Thailand</option><option value='TG'>Togo</option><option value='TO'>Tonga</option><option value='TT'>Trinidad and Tobago</option><option value='TN'>Tunis</option><option value='TR'>Turkey</option><option value='TM'>Turkmenistan</option><option value='TV'>Tuvalu</option><option value='UG'>Uganda</option><option value='UA'>Ukraine</option><option value='AE'>United Arab Emirates</option><option value='GB'>United Kingdom</option><option value='US'>United States of America</option><option value='UY'>Uruguay</option><option value='UZ'>Uzbekistan</option><option value='VU'>Vanatu</option><option value='VA'>Vatican</option><option value='VE'>Venezuela</option><option value='VN'>Vietnam</option><option value='CYM'>Wales</option><option value='YE'>Yemen</option><option value='ZM'>Zambia</option><option value='ZW'>Zimbabwe</option>                                </select>
+                            </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">* Graduation Date</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <select name="mezuniyet_yili" id="mezuniyet_yili" class="form-control" required>
+                                    <option value=''>Choose</option><option value='2024'>2024</option><option value='2023'>2023</option><option value='2022'>2022</option><option value='2021'>2021</option><option value='2020'>2020</option><option value='2019'>2019</option><option value='2018'>2018</option><option value='2017'>2017</option><option value='2016'>2016</option><option value='2015'>2015</option><option value='2014'>2014</option><option value='2013'>2013</option><option value='2012'>2012</option><option value='2011'>2011</option><option value='2010'>2010</option><option value='2009'>2009</option><option value='2008'>2008</option><option value='2007'>2007</option><option value='2006'>2006</option><option value='2005'>2005</option><option value='2004'>2004</option><option value='2003'>2003</option><option value='2002'>2002</option><option value='2001'>2001</option><option value='2000'>2000</option><option value='1999'>1999</option><option value='1998'>1998</option><option value='1997'>1997</option><option value='1996'>1996</option><option value='1995'>1995</option><option value='1994'>1994</option><option value='1993'>1993</option><option value='1992'>1992</option><option value='1991'>1991</option><option value='1990'>1990</option><option value='1989'>1989</option><option value='1988'>1988</option>                                </select>
+                            </div>
+            </div>
+
+                        <div class="form-group" style="display: none;">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">* Grading Scale</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <div class="checkbox radiobox">
+                                    <label>
+                                        <input type="radio" name="not_sistemi" value="4" checked>
+                                        <span>4 scale</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="not_sistemi" value="100">
+                                        <span>100 scale</span>
+                                    </label>
+                                </div>
+                            </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">Cumulative GPA</label>
+                            </div>
+                <div class="col-sm-8">
+                                    <input  name="gno" type="text" id="gno" class="form-control" size="4" maxlength="4">
+                </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label no-padding-top">English Proficiency Exam Type</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-5">
+                                        <select name="ingilizce_sinav" id="ingilizce_sinav" class="form-control">
+                                            <option value="">Choose</option>
+
+                                            <option value="TOEFL-IBT">TOEFL (IBT)</option>
+                                            <option value="PTE">PTE</option>
+                                            <option value="IELTS">IELTS</option>
+                                            <option value="Ois">Ois</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="margin-top-10-xs">
+                                        <div class="col-xs-3 col-sm-2 label-div text-right padding-top-10-xs">
+                                            <label class="control-label">Score</label>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-5">
+                                            <input name="ingilizce_puan" type="text" id="ingilizce_puan" class="form-control" maxlength="10">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">Other Languages</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input  name="yabanci_dil" type="text" id="yabanci_dil" class="form-control" >
+                            </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                               <label class="control-label">International or National Test Score <small>(if available)</small></label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input name="int_sinav_notu" maxlength="100" type="text" id="int_sinav_notu" type="text" class="form-control">
+                            </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">Photo</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input name="fotograf" type="file" id="fotograf" required="true">
+                </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                               <label class="control-label">High School Graduation Document 1</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input name="lise_diploma" type="file" id="lise_diploma" required="true">
+                            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">High School Graduation Document 2</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input name="lise_diploma2" type="file" id="lise_diploma2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">Transcript 1 </label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input name="lise_transkript" type="file" id="lise_transkript" required="true">
+                            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">Transcript 2 </label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input name="lise_transkript2" type="file" id="lise_transkript2">
+                </div>
+            </div>
+
+            <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label class="control-label">Copy of Passport</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input name="pasaport_kopya" type="file" id="pasaport_kopya" required="true">
+                            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">English Exam Document 1</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input name="dil_belgesi" type="file" id="dil_belgesi">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">English Exam Document 2</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <input name="dil_belgesi2" type="file" id="dil_belgesi2">
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                            <div class="col-sm-8">
+                                <input name="diger" type="file" id="diger">
+                            </div>
+            </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 label-div">
+                                <label id='proje_label' name='proje_label' class="control-label">Projects and Certificates</label>
+                            </div>
+
+                            <div class="col-sm-8">
+                                <input name="proje_sertifika" type="file" id="proje_sertifika">
+                            </div>
+            </div>
+
+
+
+    <!--<div class="form-group">
+            <div class="col-xs-12">
+                <label class="control-label"><b>* Please state briefly why you would like to study at Ois</b></label>
+            </div>
+            <div class="col-sm-12">
+                <textarea name="aciklama" id="aciklama" class="form-control" rows="5"></textarea>
+            </div>
+
+        </div>-->
+            <div class="form-group">
+                <div class="col-sm-4 label-div">
+                    <label class="control-label">* Do you have any transfer courses?</label>
+                </div>
+
+                <div class="col-sm-8">
+                    <select class="form-control" name="ders_transfer_etme" id="ders_transfer_etme">
+                        <option value="">Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+    <div class="form-group">
+            <div class="col-xs-12">
+                You will be notified about your application within two weeks, If you don’t get any information, please contact International Office ( internationaloffice@cyprus.bau.edu.tr) after checking your spam/junk mails.
+
+                <br>
+                <br>
+                If the student's application is approved by the committee, <b>Bahçeşehir Cyprus University</b> will send a provisional acceptance letter to the student. An official acceptance letter is going to be sent, after the student completes pre-payment. All international students who need student visa must apply to the Turkish Consulate or <b>TRNC Consulate</b>, nearest to their area-of-residence, with the letter of acceptance provided by <b>BAHÇEŞEHİR CYPRUS UNIVERSITY</b>.
+
+
+            </div>
+        </div>
+
+
+
+    <div class="form-group no-margin-bottom">
+            <div class="col-xs-12">
+        <button class="btn btn-primary">SUBMIT</button>
+            </div>
+    </div>
+
+
+         </form>
+
+                        <!-- Global site tag (gtag.js) - Google Analytics -->
+                        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127443906-14"></script>
+                        <script>
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+
+                            gtag('config', 'UA-127443906-14');
+                        </script>
+</body>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</html>
+
+    </body>
+</html>
